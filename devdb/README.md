@@ -6,7 +6,9 @@ This instance is kept separate from the primary `docker-compose.yml` file as it 
 ## Setup Instructions
 1. Download and install Docker on your computer [link](https://docs.docker.com/get-docker/)
 1. Download and install AWS CLI on your computer [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-1. Run startup script within devdb folder: `sh start-db.sh`
+1. Run startup script within devdb folder: 
+   - Mac / Linux: `sh start-db.sh`
+   - Windows: `powershell -executionpolicy bypass ".\start-db.ps1"`
 1. Modify the `/backend/.env` file as follows:
 ```
 AWS_DYNAMODB_REGION=us-west-1
@@ -20,7 +22,9 @@ The settings are used as follows:
 - **AWS_DYNAMODB_ENDPOINT**: Only needed for local testing - overrides AWS service lookup and uses specified the endpoint
 
 ## Spindown Instructions
-1. Run shutdown script within devdb folder: `sh stop-db.sh`
+1. Run shutdown script within devdb folder: 
+   - Mac / Linux: `sh stop-db.sh`
+   - Windows: `powershell -executionpolicy bypass ".\stop-db.ps1"`
 
 ## Example setup for connecting client to local database:
 ```

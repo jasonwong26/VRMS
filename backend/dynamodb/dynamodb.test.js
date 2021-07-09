@@ -35,8 +35,8 @@ describe("DynamoDb", () => {
       const data = await client.get(params).promise();
       expect(data).toBeDefined();
       expect(data.Item).toBeDefined();
-      expect(params.Key.pk).toEqual(data.Item?.pk);
-      expect(params.Key.sk).toEqual(data.Item?.sk);
+      expect(data.Item.pk).toEqual(params.Key.pk);
+      expect(data.Item.sk).toEqual(params.Key.sk);
     });
     it("returns null when retrieving non-existing record", async () => {
       const params = {
