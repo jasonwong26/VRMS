@@ -1,14 +1,16 @@
 const { Endpoint, DynamoDB } = require("aws-sdk");
 
 describe("DynamoDb", () => {
-  expect(process.env.DOCKER_TABLE_NAME).toBeTruthy();
-  expect(process.env.AWS_DOCKER_ENDPOINT).toBeTruthy();
-  const testTable = process.env.DOCKER_TABLE_NAME || "";
-  const testEndpoint = process.env.AWS_DOCKER_ENDPOINT || "";
+  expect(process.env.AWS_DYNAMODB_REGION).toBeTruthy();
+  expect(process.env.AWS_DYNAMODB_TABLE_NAME).toBeTruthy();
+  expect(process.env.AWS_DYNAMODB_ENDPOINT).toBeTruthy();
+  const region = process.env.AWS_DYNAMODB_REGION || "";
+  const testTable = process.env.AWS_DYNAMODB_TABLE_NAME || "";
+  const testEndpoint = process.env.AWS_DYNAMODB_ENDPOINT || "";
 
   describe("construction tests", () => {
     it("successfully builds client", async () => {
-      const opts = { region: "localhost", endpoint: testEndpoint };
+      const opts = { region, endpoint: testEndpoint };
       const client = new DynamoDB.DocumentClient(opts);
       expect(client).toBeInstanceOf(DynamoDB.DocumentClient);
       // Assert
@@ -18,7 +20,7 @@ describe("DynamoDb", () => {
   });
 
   describe("docker integration tests", () => {
-    const opts = {region: "localhost", endpoint: testEndpoint };
+    const opts = {region, endpoint: testEndpoint };
     const client = new DynamoDB.DocumentClient(opts);
 
     it("retrieves data from valid input", async () => {

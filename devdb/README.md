@@ -1,12 +1,23 @@
 # Running a local DynamoDb instance via Docker
 
 The below steps set up a local DynamoDb instance that runs within its own Docker container and is exposed on port 8042.
-This instance is kept separate from the primary `docker-compose.yml` file as it simulates an external resource.
+This instance is kept separate from the primary `docker-compose.yml` file as it simulates an external resource and should not be included in Production builds.
 
 ## Setup Instructions
 1. Download and install Docker on your computer [link](https://docs.docker.com/get-docker/)
 1. Download and install AWS CLI on your computer [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 1. Run startup script within devdb folder: `sh start-db.sh`
+1. Modify the `/backend/.env` file as follows:
+```
+AWS_DYNAMODB_REGION=us-west-1
+AWS_DYNAMODB_TABLE_NAME=demo
+AWS_DYNAMODB_ENDPOINT=http://localhost:8042
+``` 
+
+The settings are used as follows:
+- **AWS_DYNAMODB_REGION**: The host region for the database
+- **AWS_DYNAMODB_TABLE_NAME**: The identifier for the database
+- **AWS_DYNAMODB_ENDPOINT**: Only needed for local testing - overrides AWS service lookup and uses specified the endpoint
 
 ## Spindown Instructions
 1. Run shutdown script within devdb folder: `sh stop-db.sh`
